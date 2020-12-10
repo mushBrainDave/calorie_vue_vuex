@@ -1,6 +1,6 @@
 /* eslint-disable */
 import axios from 'axios';
-const API_URL = 'http://localhost:8000'; /* https://calorie-c.herokuapp.com or http://localhost:8000 */
+const API_URL = 'https://calorie-c.herokuapp.com'; /* https://calorie-c.herokuapp.com or http://localhost:8000 */
 
 export class APIService {
 
