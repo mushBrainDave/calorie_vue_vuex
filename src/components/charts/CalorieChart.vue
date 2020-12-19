@@ -14,21 +14,10 @@ export default {
   components: {
     zingchart: zingchartVue
   },
-  data() {
-    return {
-      chartData: {
-        type: "line",
-        series: [
-            { values: this.inta },
-        ]
-      }
-    };
-  },
-
   computed: {
     ...mapGetters('intakes', ['intakesByD']),
     inta() {
-      let sorted = this.intakesByD.sort((a,b) => a.intake_date - b.intake_date);
+      let sorted = this.intakesByD.sort((a,b) => (a.intake_date > b.intake_date) ? 1 : ((b.intake_date > a.intake_date) ? -1 : 0));
       return sorted.map(o => {
         return [o.intake_date, parseInt(o.calories)]
       });
@@ -83,9 +72,10 @@ export default {
           label: {
             text: 'Calories',
           },
+          minValue: '1000',
+          zooming: true
         }
       };
-    
     }
   }
 };
