@@ -4,8 +4,8 @@
     <v-app>
         <v-dialog v-model="dialog" persistent max-width="600px" min-width="360px">
             <div>
-                <v-tabs v-model="tab" show-arrows background-color="deep-purple accent-4" icons-and-text dark grow>
-                    <v-tabs-slider color="purple darken-4"></v-tabs-slider>
+                <v-tabs v-model="tab" show-arrows background-color="blue accent-3" icons-and-text dark grow>
+                    <v-tabs-slider color="black"></v-tabs-slider>
                     <v-tab v-for="i in tabs" :key="i.name">
                         <v-icon large>{{ i.icon }}</v-icon>
                         <div class="caption py-1">{{ i.name }}</div>
@@ -178,12 +178,6 @@
           })
         }
       },
-      reset() {
-        this.$refs.form.reset();
-      },
-      resetValidation() {
-        this.$refs.form.resetValidation();
-      }
     },
   }
 </script>
