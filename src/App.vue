@@ -69,21 +69,6 @@
         { title: 'Settings', url:"/settings-list" },
       ]
     }),
-
-    mounted() {
-      apiService.getSettingsList().then(response => {
-        this.authenticated = true;
-      }).catch(error => {
-        if (error.response.status === 401) {
-          localStorage.removeItem('isAuthenticates');
-          localStorage.removeItem('log_user');
-          localStorage.removeItem('token');
-          this.authenticated = false;
-        }
-      });
-      console.log('this.authenticated--'+this.authenticated);
-    },
-
     methods: {
       logout() {
         localStorage.removeItem('isAuthenticates');
@@ -91,7 +76,7 @@
         localStorage.removeItem('token');
         this.authenticated = false;
         // router.push('/');
-        window.location = "/"
+        window.location = "/auth"
       },
       login() {
         router.push("/auth");

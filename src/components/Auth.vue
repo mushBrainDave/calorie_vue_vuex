@@ -168,7 +168,7 @@
             localStorage.setItem('log_user', JSON.stringify(this.credentials.username));
             //router.push("/");
             //router.go(-1);
-            window.location = "/"
+            window.location = "/"    
           }).catch(e => {
             localStorage.removeItem('isAuthenticates');
             localStorage.removeItem('log_user');
