@@ -34,10 +34,10 @@
 </template>
 
 <script>
-  import router from '../router';
-  import {APIService} from '../http/APIService';
+  import router from '../../router';
+  import {APIService} from '../../http/APIService';
   import CalorieChart from './charts/CalorieChart.vue';
-  import DatePicker from './date_picker/DatePicker.vue';
+  import DatePicker from '../date_picker/DatePicker.vue';
   const apiService = new APIService();
 
   export default {
@@ -54,7 +54,7 @@
     },
     beforeCreate() {
       this.$store.dispatch('intakes/getIntakes')
-    },
+      this.$store.dispatch('intakes/getSettings')    },
     methods: {
       viewIntake() {
         router.push('/intake-list');

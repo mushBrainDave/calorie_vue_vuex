@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+import Home from '@/components/home/Home'
 import Auth from '@/components/Auth'
-import SettingList from '@/components/SettingsList'
-import SettingCreate from '@/components/SettingsCreate'
-import IntakeList from '@/components/IntakeList'
-import IntakeCreate from '@/components/IntakeCreate'
+import SettingList from '@/components/setting/SettingsList'
+import SettingCreate from '@/components/setting/SettingsCreate'
+import IntakeList from '@/components/intake/IntakeList'
+import IntakeCreate from '@/components/intake/IntakeCreate'
 
 Vue.use(Router)
 

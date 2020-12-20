@@ -52,15 +52,16 @@
 
 <script>
 
-  import router from '../router';
-  import {APIService} from '../http/APIService';
+  import router from '../../router';
+  import {APIService} from '../../http/APIService';
   const apiService = new APIService();
 
   import TableDesktop from './charts/TableDesktop';
   import TableMobile from './charts/TableMobile';
-  import DatePicker from './date_picker/DatePicker';
+  import DatePicker from '../date_picker/DatePicker';
 
-  import { mapState, mapActions, mapGetters, mapMutations } from 'vuex'
+  import { mapState } from 'vuex'
+
 
   export default {
     name: "IntakeList",
@@ -75,13 +76,8 @@
       showMsg: '',
       isMobile: false,
     }),
-
     mounted() {
       this.showMessages();
-    },
-    beforeCreate() {
-      this.$store.dispatch('intakes/getIntakes')
-      this.$store.dispatch('intakes/getSettings')
     },
     methods: {
       onResize() {

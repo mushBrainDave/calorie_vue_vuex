@@ -111,10 +111,10 @@
 
 <script>
 
-  import router from '../router';
-  import {APIService} from '../http/APIService';
+  import router from '../../router';
+  import {APIService} from '../../http/APIService';
   const apiService = new APIService();
-  import { mapState, mapActions, mapGetters, mapMutations } from 'vuex'
+  import { mapState } from 'vuex'
 
   export default {
     name: "Settings",
@@ -136,9 +136,7 @@
       ],
 
     }),
-    beforeCreate() {
-      this.$store.dispatch('intakes/getSettings')
-    },
+
     mounted() {
       this.showMessages();
     },
