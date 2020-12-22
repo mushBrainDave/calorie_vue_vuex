@@ -56,6 +56,7 @@
   import router from './router';
   import {APIService} from './http/APIService';
   const apiService = new APIService();
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'App',
@@ -69,6 +70,25 @@
         { title: 'Settings', url:"/settings-list" },
       ]
     }),
+    computed: {
+      ...mapActions('intakes', ['getIntakes'])
+    },
+    mounted() {
+      this.getIntakes.then(response => {
+        this.$store.dispatch('intakes/getSettings')
+        this.authenticated = true;
+        console.log("before catch")
+      }).catch(error => {
+        if (error.response.status === 401) {
+          console.log('after catch')
+          localStorage.removeItem('isAuthenticates');
+          localStorage.removeItem('log_user');
+          localStorage.removeItem('token');
+          this.authenticated = false;
+        }
+      });
+      console.log('this.authenticated--'+this.authenticated);
+    },
     methods: {
       logout() {
         localStorage.removeItem('isAuthenticates');
