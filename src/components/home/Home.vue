@@ -52,9 +52,6 @@
     mounted() {
       this.getUser();
     },
-    beforeCreate() {
-      this.$store.dispatch('intakes/getIntakes')
-      this.$store.dispatch('intakes/getSettings')    },
     methods: {
       viewIntake() {
         router.push('/intake-list');
