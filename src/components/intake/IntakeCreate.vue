@@ -106,10 +106,6 @@
     },
 
     methods: {
-      ...mapActions(
-        'intakes', ['getIntakes'],
-        'intakes', ['createIntake']
-        ),
       createIntake() {
         apiService.addNewIntake(this.intake).then(response => {
           if (response.status === 201) {
@@ -148,7 +144,6 @@
       }
     },
     mounted() {
-      this.getIntakes();
       if (this.$route.params.pk) {
         this.pageTitle = "Edit Intake";
         this.isUpdate = true;
