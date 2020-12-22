@@ -40,7 +40,7 @@
       <v-row align="center" justify="center">
         <v-col cols="12" md="10" v-resize="onResize">
           <date-picker />
-          <table-desktop v-if="!isMobile" :method="updateIntake" @update="updateIntake" @delete="deleteIntake" />
+          <table-desktop v-if="!isMobile" @update="updateIntake" @delete="deleteIntake" />
           <table-mobile v-else @update="updateIntake" @delete="deleteIntake" />
         <v-btn class="blue mt-4 white--text" @click="addNewIntake">Add Intake</v-btn>  
         </v-col>  
@@ -100,7 +100,8 @@
           router.push("/auth");
         }
       },
-      updateIntake(intake) {        router.push('/intake-create/' + intake.id);
+      updateIntake(intake) {
+        router.push('/intake-create/' + intake.id);
       },
       deleteIntake(intake) {
         apiService.deleteIntake(intake.id).then(response => {
