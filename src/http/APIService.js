@@ -1,25 +1,18 @@
 /* eslint-disable */
 import axios from 'axios';
-const API_URL = 'https://calorie-c.herokuapp.com'; /* https://calorie-c.herokuapp.com or http://localhost:8000 */
+const API_URL = 'https://calorie-counter-rest.herokuapp.com'; /* https://calorie-counter-rest.herokuapp.com or http://localhost:8000 */
 
 export class APIService {
 
-  getSetting(param_pk){
-    const url = `${API_URL}/api/settings/${param_pk}`;
+  getSetting(){
+    const url = `${API_URL}/api/settings`;
     let jwtToken = localStorage.getItem('token');
     console.log(":::jwtToken:::::"+jwtToken);
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.get(url, {headers: {Authorization: `jwt ${jwtToken}`}});
   }
-  getSettingsList(){
-    const url = `${API_URL}/api/settings`;
-    let jwtToken = localStorage.getItem('token');
-    console.log(":::jwtToken:::::" + jwtToken);
-    const headers = {Authorization: `jwt ${jwtToken}`};
-    return axios.get(url, {headers: headers});
-  }
   updateSettings(settings){
-    const url = `${API_URL}/api/settings/${settings.user}`;
+    const url = `${API_URL}/api/settings/`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.put(url, settings, {headers: headers});

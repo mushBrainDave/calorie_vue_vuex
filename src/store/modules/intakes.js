@@ -1,3 +1,4 @@
+import router from '../../router';
 import {APIService} from '../../http/APIService';
 const apiService = new APIService();
 
@@ -52,7 +53,7 @@ const actions = {
     },
     getSettings({commit}) {
         apiService.getSettingsList().then(response => {
-            commit('setSettings', response.data.data)
+            commit('setSettings', response.data)
           //this.settings = response.data.data;
           //this.settingsSize = this.settings.length;
           if (localStorage.getItem("isAuthenticates")
@@ -68,6 +69,24 @@ const actions = {
           }
         });
       },
+    updateSettings(settings) {
+        console.log(settings.state.settings)
+        //console.log(state.settings[0])
+        apiService.updateSettings(state.settings[0]).then(response => {
+          if (response.status === 200) {
+            state.settings[0] = response.data;
+            router.push('/settings-list/update');
+          }else{
+              this.showMsg = "error";
+          }
+        }).catch(error => {
+          if (error.response.status === 401) {
+            router.push("/auth");
+          }else if (error.response.status === 400) {
+            this.showMsg = "error";
+          }
+        });
+      }
 }
 
 export default {

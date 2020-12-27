@@ -93,7 +93,7 @@
                     />
  
                 </v-container>
-                <v-btn class="blue white--text" @click="updateSettings">Update</v-btn>
+                <v-btn class="blue white--text" @click="updateSettings(settings)">Update</v-btn>
                 <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
@@ -110,6 +110,7 @@
   import router from '../../router';
   import {APIService} from '../../http/APIService';
   const apiService = new APIService();
+  import { mapActions, mapState } from 'vuex'
  
   export default {
     name: 'SettingsCreate',
@@ -118,9 +119,9 @@
       return {
         items: [
           { answer: 'the most calories I can get', value: true },
-          { answer: 'the least calories I can get', value: false}
-          ],
-        settings: {},
+          { answer: 'the least calories I can get', value: false }
+        ],
+        settings: [],
         showError: false,
         pageTitle: "Add New Setting",
         isUpdate: false,
@@ -128,14 +129,17 @@
       };
     },
     methods: {
+      //...mapActions('intakes', ['updateSettings']),
+
       cancelOperation(){
-         router.push("/settings-list");
+         router.push("/");
       },
-      updateSettings() {
-        apiService.updateSettings(this.settings).then(response => {
+      updateSettings(settings) {
+        console.log(this.settings)
+        apiService.updateSettings(settings).then(response => {
           if (response.status === 200) {
             this.settings = response.data;
-            router.push('/settings-list/update');
+            router.push('/');
           }else{
               this.showMsg = "error";
           }
@@ -149,6 +153,14 @@
       }
     },
     mounted() {
+      apiService.getSetting().then(response => {
+        this.settings = response.data;
+      }).catch(error => {
+        if (error.response.status === 401) {
+          router.push("/auth")
+        }
+      })
+      //modify this conditional when creating read-only form
       if (this.$route.params.pk) {
         this.pageTitle = "Edit Settings";
         this.isUpdate = true;

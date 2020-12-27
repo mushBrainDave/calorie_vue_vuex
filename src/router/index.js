@@ -2,8 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/home/Home'
 import Auth from '@/components/Auth'
-import SettingList from '@/components/setting/SettingsList'
-import SettingCreate from '@/components/setting/SettingsCreate'
+import SettingCreate from '@/components/setting/Settings'
 import IntakeList from '@/components/intake/IntakeList'
 import IntakeCreate from '@/components/intake/IntakeCreate'
 
@@ -19,23 +18,8 @@ export default new Router({
       component: Home
     },
     {
-      path: '/settings-list',
-      name: 'SettingsList',
-      component: SettingList
-    },
-    {
-      path: '/settings-list/:msg',
-      name: 'SettingsUpdatedList',
-      component: SettingList
-    },
-    {
-      path: '/settings-create',
-      name: 'SettingsCreate',
-      component: SettingCreate
-    },
-    {
-      path: '/settings-create/:pk',
-      name: 'SettingsUpdate',
+      path: '/settings',
+      name: 'Settings',
       component: SettingCreate
     },
      {
