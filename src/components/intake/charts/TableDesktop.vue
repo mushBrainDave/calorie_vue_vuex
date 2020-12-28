@@ -10,8 +10,7 @@
         label="Search"
         single-line
         hide-details
-        >
-        </v-text-field>
+        ></v-text-field>
       </v-card-title>
       <v-data-table
       :headers="headers"
@@ -24,7 +23,6 @@
       >
         <template v-slot:item="props">
           <tr>
-            <!--<td align="left">{{ props.item }}</td>-->
             <td nowrap="true" align="left"><v-chip dark :color="getColor(props.item.calories)">{{ props.item.calories }}</v-chip></td>
             <td nowrap="true" align="left">{{ props.item.current_weight }}</td>
             <td nowrap="true" align="left">{{ props.item.fat_perc }}</td>
@@ -48,7 +46,6 @@
       return {
         search: '',
         headers: [
-          //{text: 'User', sortable: false, align: 'left',},
           {text: 'Calories', sortable: true, align: 'left', value: 'calories'},
           {text: 'Current Weight (lbs)', sortable: false, align: 'left', value: 'current_weight'},
           {text: 'Body Fat (%)', sortable: false, align: 'left', value: 'body_fat'},
@@ -58,7 +55,6 @@
           {text: 'Intake Date', sortable: true, align: 'left', value: 'intake_date'},
           {text: 'Update', sortable: false, align: 'center',},
           {text: 'Delete', sortable: false, align: 'center',}
-
         ],
         sortBy: 'intake_date',
         sortDesc: false,

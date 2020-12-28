@@ -16,10 +16,7 @@
         v-on="on"
         ></v-text-field>
     </template>
-    <v-date-picker
-        v-model="dates"
-        range
-    ></v-date-picker>
+    <v-date-picker v-model="dates" range />
     </v-menu>
 </template>
 
@@ -36,7 +33,7 @@
           this.$store.commit("intakes/setDates", (newValue))
         }
       },
-      dateRangeText () {
+      dateRangeText() {
         return this.dates.join(' ~ ')
       },
     },

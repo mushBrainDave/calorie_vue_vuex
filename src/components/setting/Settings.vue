@@ -24,57 +24,12 @@
               <v-card-text>
                 <v-form ref="form" lazy-validation>
                   <v-container>
- 
-                    <!--v-text-field
-                    v-model="investment.cust_number"
-                    label="Customer"
-                    required
-                    type="number"
-                    /-->
-                    <!--<v-select
-                    v-model="settings"
-                    label="User"
-                    :items="list"
-                    item-value='id'
-                    item-text='id'
-                    ></v-select>-->
- 
-                    <v-text-field
-                    v-model="settings.calorie_goal"
-                    label="Calorie Goal"
-                    required
-                    type="number"
-                    />
-                    <v-text-field
-                    v-model="settings.weight_goal"
-                    label="Weight Goal (lbs)"
-                    required
-                    type="number"
-                    />
-                    <v-text-field
-                    v-model="settings.fat_perc_goal"
-                    label="Body Fat Goal (%)"
-                    required
-                    type="number"
-                    />
-                    <v-text-field
-                    v-model="settings.protein_goal"
-                    label="Protein Goal"
-                    required
-                    type="number"
-                    />
-                    <v-text-field
-                    v-model="settings.fat_goal"
-                    label="Fat Goal"
-                    required
-                    type="number"
-                    />
-                    <v-text-field
-                    v-model="settings.carb_goal"
-                    label="Carb Goal"
-                    required
-                    type="number"
-                    />
+                    <v-text-field v-model="settings.calorie_goal" label="Calorie Goal" required type="number" />
+                    <v-text-field v-model="settings.weight_goal" label="Weight Goal (lbs)" required type="number" />
+                    <v-text-field v-model="settings.fat_perc_goal" label="Body Fat Goal (%)" required type="number" />
+                    <v-text-field v-model="settings.protein_goal" label="Protein Goal" required type="number" />
+                    <v-text-field v-model="settings.fat_goal" label="Fat Goal" required type="number" />
+                    <v-text-field v-model="settings.carb_goal" label="Carb Goal" required type="number" />
                     <v-select
                     v-model="settings.calorie_min_max"
                     label="My calories goal is"
@@ -91,7 +46,6 @@
                     required
                     type="date"
                     />
- 
                 </v-container>
                 <v-btn class="blue white--text" @click="updateSettings(settings)">Update</v-btn>
                 <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>

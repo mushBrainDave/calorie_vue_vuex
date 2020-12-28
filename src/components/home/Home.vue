@@ -16,15 +16,8 @@
     </v-container>
 
     <v-container fluid>
-      <v-row
-        align="center"
-        justify="center"
-      >
-        <v-col 
-          cols="12"
-            sm="10"
-            md="10"
-        >
+      <v-row align="center" justify="center">
+        <v-col cols="12" sm="10" md="10">
           <date-picker />
           <calorie-chart />
         </v-col>

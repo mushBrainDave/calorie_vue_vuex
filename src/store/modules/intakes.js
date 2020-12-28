@@ -2,7 +2,6 @@ import router from '../../router';
 import {APIService} from '../../http/APIService';
 const apiService = new APIService();
 
-
 const state = {
     intakes: [],
     settings: [],

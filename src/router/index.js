@@ -27,7 +27,7 @@ export default new Router({
       name: 'IntakeList',
       component: IntakeList
     },
-{
+    {
       path: '/intake-list/:msg',
       name: 'IntakeUpdatedList',
       component: IntakeList

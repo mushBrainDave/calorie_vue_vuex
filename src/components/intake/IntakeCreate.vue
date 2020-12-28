@@ -24,50 +24,13 @@
               <v-card-text>
                 <v-form ref="form" lazy-validation>
                   <v-container>
-                    <!--<v-text-field
-                      v-model="intake.user"
-                      label="User"
-                      required
-                    />-->
-                    <v-text-field
-                      v-model="intake.calories"
-                      label="Calories"
-                      required
-                    />
-                    <v-text-field
-                      v-model="intake.current_weight"
-                      label="Weight (lbs)"
-                      required
-                    />
-                    <v-text-field
-                      v-model="intake.fat_perc"
-                      label="Body Fat (%)"
-                      required
-                    />
-                    <v-text-field
-                      v-model="intake.protein"
-                      label="Protein (g)"
-                      required
-                    />
-                    <v-text-field
-                      v-model="intake.fat"
-                      label="Fat (g)"
-                      required
-                      type="number"
-                    />
-                    <v-text-field
-                      v-model="intake.carbs"
-                      label="Carbs (g)"
-                      required
-                      type="number"
-                    />
-                    <v-text-field
-                      v-model="intake.intake_date"
-                      label="Intake Date"
-                      required
-                      type="date"
-                    />
- 
+                    <v-text-field v-model="intake.calories" label="Calories" required/>
+                    <v-text-field v-model="intake.current_weight" label="Weight (lbs)" required />
+                    <v-text-field v-model="intake.fat_perc" label="Body Fat (%)" required />
+                    <v-text-field v-model="intake.protein" label="Protein (g)" required />
+                    <v-text-field v-model="intake.fat" label="Fat (g)" required type="number" />
+                    <v-text-field v-model="intake.carbs" label="Carbs (g)" required type="number" />
+                    <v-text-field v-model="intake.intake_date" label="Intake Date" required type="date" />
                 </v-container>
                 <v-btn v-if="!isUpdate" class="blue white--text" @click="createIntake">Save</v-btn>
                 <v-btn v-if="isUpdate" class="blue white--text" @click="updateIntake">Update</v-btn>
@@ -81,8 +44,7 @@
     </v-row>
   </v-container>
 </template>
- 
- 
+
 <script>
   import router from '../../router';
   import {APIService} from '../../http/APIService';
