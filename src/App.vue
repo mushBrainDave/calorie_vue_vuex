@@ -84,7 +84,6 @@
           this.authenticated = false;
         }
       });
-      console.log('this.authenticated--'+this.authenticated);
     },
     methods: {
       logout() {

@@ -61,7 +61,7 @@
       }
     },
     methods: {
-      getColor (calories) {
+      getColor(calories) {
         if (this.settings.calorie_min_max === true)
           if (calories > this.settings.calorie_goal) return 'red'
           else return 'green'

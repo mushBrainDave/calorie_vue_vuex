@@ -58,8 +58,6 @@
   import TableMobile from './charts/TableMobile';
   import DatePicker from '../date_picker/DatePicker';
 
-  import { mapState } from 'vuex'
-
   export default {
     name: "IntakeList",
     components: {
