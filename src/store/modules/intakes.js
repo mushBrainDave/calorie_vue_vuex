@@ -21,7 +21,7 @@ const getters = {
 
 const mutations = {
     setIntakes(state, intakes) {
-    state.intakes = intakes
+        state.intakes = intakes
     },
     setDates(state, dates) {
         state.dates = dates
@@ -35,8 +35,6 @@ const actions = {
     getIntakes({commit}) {
         apiService.getIntakeList().then(response => {
             commit('setIntakes', response.data.data)
-            //this.intakes = response.data.data;
-            //this.intakeSize = this.intakes.length;
             if (localStorage.getItem("isAuthenticates")
             && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
             this.validUserName = JSON.parse(localStorage.getItem("log_user"));
@@ -51,10 +49,8 @@ const actions = {
         });
     },
     getSettings({commit}) {
-        apiService.getSettingsList().then(response => {
+        apiService.getSetting().then(response => {
             commit('setSettings', response.data)
-          //this.settings = response.data.data;
-          //this.settingsSize = this.settings.length;
           if (localStorage.getItem("isAuthenticates")
             && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
             this.validUserName = JSON.parse(localStorage.getItem("log_user"));
@@ -68,13 +64,10 @@ const actions = {
           }
         });
       },
-    updateSettings(settings) {
-        console.log(settings.state.settings)
-        //console.log(state.settings[0])
-        apiService.updateSettings(state.settings[0]).then(response => {
+    updateSettings() {
+        apiService.updateSettings(state.settings).then(response => {
           if (response.status === 200) {
-            state.settings[0] = response.data;
-            router.push('/settings-list/update');
+            router.push('/');
           }else{
               this.showMsg = "error";
           }

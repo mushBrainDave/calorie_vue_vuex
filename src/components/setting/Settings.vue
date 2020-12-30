@@ -47,7 +47,7 @@
                     type="date"
                     />
                 </v-container>
-                <v-btn class="blue white--text" @click="updateSettings(settings)">Update</v-btn>
+                <v-btn class="blue white--text" @click="updateSettings">Update</v-btn>
                 <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
@@ -75,7 +75,6 @@
           { answer: 'the most calories I can get', value: true },
           { answer: 'the least calories I can get', value: false }
         ],
-        settings: [],
         showError: false,
         pageTitle: "Add New Setting",
         isUpdate: false,
@@ -83,48 +82,22 @@
       };
     },
     methods: {
-      //...mapActions('intakes', ['updateSettings']),
-
+      ...mapActions('intakes', ['updateSettings']),
       cancelOperation(){
          router.push("/");
-      },
-      updateSettings(settings) {
-        console.log(this.settings)
-        apiService.updateSettings(settings).then(response => {
-          if (response.status === 200) {
-            this.settings = response.data;
-            router.push('/');
-          }else{
-              this.showMsg = "error";
-          }
-        }).catch(error => {
-          if (error.response.status === 401) {
-            router.push("/auth");
-          }else if (error.response.status === 400) {
-            this.showMsg = "error";
-          }
-        });
       }
     },
-    mounted() {
-      apiService.getSetting().then(response => {
-        this.settings = response.data;
-      }).catch(error => {
-        if (error.response.status === 401) {
-          router.push("/auth")
+    computed: {
+      //...mapState('intakes', ['settings']),
+      settings: {
+      //settings: { cannot be used with spread operator
+        get() {
+          return this.$store.state.intakes.settings
+          //return this.settings
+        },
+        set(newValue) {
+          this.$store.commit('updateSettings', newValue)
         }
-      })
-      //modify this conditional when creating read-only form
-      if (this.$route.params.pk) {
-        this.pageTitle = "Edit Settings";
-        this.isUpdate = true;
-        apiService.getSetting(this.$route.params.pk).then(response => {
-          this.settings = response.data;
-        }).catch(error => {
-          if (error.response.status === 401) {
-            router.push("/auth");
-          }
-        });
       }
     },
   }
