@@ -56,12 +56,11 @@
   import {APIService} from './http/APIService';
   const apiService = new APIService();
   
-  import { mapActions } from 'vuex'
+  import { mapActions, mapState } from 'vuex'
 
   export default {
     name: 'App',
     data: () => ({
-      authenticated: false,
       dialog: false,
       menu: [
         { title: 'Home', url:"/" },
@@ -70,12 +69,14 @@
       ]
     }),
     computed: {
+      ...mapState('intakes', ['authenticated'])
       //...mapActions('intakes', ['getIntakes', 'getSettings'])
     },
     mounted() {
       //this.getIntakes,
       //this.getSettings
-      this.getIntakes(),
+
+      this.getIntakes()
       this.getSettings()
     },
     methods: {

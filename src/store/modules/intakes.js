@@ -6,6 +6,7 @@ const state = {
     intakes: [],
     settings: [],
     dates: ['2020-10-21', '2020-10-28'],
+    authenticated: false
 }
 
 const getters = {
@@ -28,6 +29,9 @@ const mutations = {
     },
     setSettings(state, settings) {
         state.settings = settings
+    },
+    setAuthentication(state, auth) {
+      state.authenticated = auth
     }
 }
 
@@ -39,6 +43,7 @@ const actions = {
             && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
             this.validUserName = JSON.parse(localStorage.getItem("log_user"));
             }
+            commit('setAuthentication', true)
         }).catch(error => {
             if (error.response.status === 401) {
             localStorage.removeItem('isAuthenticates');
@@ -60,7 +65,6 @@ const actions = {
             localStorage.removeItem('isAuthenticates');
             localStorage.removeItem('log_user');
             localStorage.removeItem('token');
-            router.push("/auth");
           }
         });
       },
