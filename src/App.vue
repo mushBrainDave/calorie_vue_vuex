@@ -70,29 +70,23 @@
       ]
     }),
     computed: {
-      ...mapActions('intakes', ['getIntakes'])
+      //...mapActions('intakes', ['getIntakes', 'getSettings'])
     },
     mounted() {
-      this.getIntakes.then(response => {
-        this.$store.dispatch('intakes/getSettings')
-        this.authenticated = true;
-      }).catch(error => {
-        if (error.response.status === 401) {
-          localStorage.removeItem('isAuthenticates');
-          localStorage.removeItem('log_user');
-          localStorage.removeItem('token');
-          this.authenticated = false;
-        }
-      });
+      //this.getIntakes,
+      //this.getSettings
+      this.getIntakes(),
+      this.getSettings()
     },
     methods: {
+      ...mapActions('intakes', ['getIntakes', 'getSettings']),
       logout() {
         localStorage.removeItem('isAuthenticates');
         localStorage.removeItem('log_user');
         localStorage.removeItem('token');
         this.authenticated = false;
         // router.push('/');
-        window.location = "/auth"
+        window.location = "/"
       },
       login() {
         router.push("/auth");
