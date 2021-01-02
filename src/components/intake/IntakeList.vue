@@ -73,8 +73,15 @@
     }),
     mounted() {
       this.showMessages();
+      this.getUser();
     },
     methods: {
+      getUser() {
+        if (localStorage.getItem("isAuthenticates")
+          && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
+          this.validUserName = JSON.parse(localStorage.getItem("log_user"));
+        }
+      },
       onResize() {
           if (window.innerWidth < 600)
             this.isMobile = true;
