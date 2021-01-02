@@ -69,26 +69,9 @@
       ]
     }),
     computed: {
-      ...mapState('intakes', ['authenticated'])
-      //...mapActions('intakes', ['getIntakes', 'getSettings'])
-    },
-    mounted() {
-      //this.getIntakes,
-      //this.getSettings
-
-      this.getIntakes()
-      this.getSettings()
+      ...mapState('auth', ['authenticated'])
     },
     methods: {
-      ...mapActions('intakes', ['getIntakes', 'getSettings']),
-      logout() {
-        localStorage.removeItem('isAuthenticates');
-        localStorage.removeItem('log_user');
-        localStorage.removeItem('token');
-        this.authenticated = false;
-        // router.push('/');
-        window.location = "/"
-      },
       login() {
         router.push("/auth");
       },
