@@ -20,7 +20,7 @@
                           v-model="credentials.username" 
                           :counter="70"
                           label="Username"
-                          :rules="rules.username" 
+                          :rules="rules.username"
                           maxlength="70" 
                           required
                           prepend-icon="mdi-account-circle"
@@ -121,7 +121,6 @@
   export default {
     name: 'Auth',
     data: () => ({
-      credentials: {},
       valid: true,
       dialog: true,
       verify: "",
@@ -146,39 +145,18 @@
     computed: {
       passwordMatch() {
         return () => this.credentials.password === this.verify || "Password must match";
+      },
+      credentials: {
+        get() {
+          return this.$store.state.auth.credentials
+        },
+        set(newValue) {
+          this.$store.commit('auth/setAuthentication', newValue)
+        }
       }
     },
     methods: {
-      register() {
-        if (this.$refs.registerForm.validate()) {
-            apiService.register(this.credentials).then((res)=>{
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('isAuthenticates', JSON.stringify(true));
-            localStorage.setItem('log_user', JSON.stringify(this.credentials.username));
-            //router.push("/");
-            //router.go(-1);
-            window.location = "/"
-          })
-        }
-      },
-      login() {
-        if (this.$refs.loginForm.validate()) {
-            apiService.authenticateLogin(this.credentials).then((res)=>{
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('isAuthenticates', JSON.stringify(true));
-            localStorage.setItem('log_user', JSON.stringify(this.credentials.username));
-            //router.push("/");
-            //router.go(-1);
-            window.location = "/"    
-          }).catch(e => {
-            localStorage.removeItem('isAuthenticates');
-            localStorage.removeItem('log_user');
-            localStorage.removeItem('token');
-          // router.go(-1);
-            this.showMsg = 'error';
-          })
-        }
-      },
+      ...mapActions('auth', ['login', 'register'])
     },
   }
 </script>
