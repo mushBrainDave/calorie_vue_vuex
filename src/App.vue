@@ -72,6 +72,7 @@
       ...mapState('auth', ['authenticated'])
     },
     methods: {
+      ...mapActions('auth', ['logout']),
       login() {
         router.push("/auth");
       },
