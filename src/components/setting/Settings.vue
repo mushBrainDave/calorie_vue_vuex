@@ -82,7 +82,7 @@
       };
     },
     methods: {
-      ...mapActions('intakes', ['updateSettings']),
+      ...mapActions('settings', ['updateSettings']),
       cancelOperation(){
          router.push("/");
       }
@@ -92,11 +92,11 @@
       settings: {
       //settings: { cannot be used with spread operator
         get() {
-          return this.$store.state.intakes.settings
+          return this.$store.state.settings.settings
           //return this.settings
         },
         set(newValue) {
-          this.$store.commit('updateSettings', newValue)
+          this.$store.commit('settings/updateSettings', newValue)
         }
       }
     },

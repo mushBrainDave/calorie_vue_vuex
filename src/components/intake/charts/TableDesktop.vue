@@ -72,7 +72,7 @@
     },
     computed: {
       ...mapGetters('intakes', ['intakesByD']),
-      ...mapState('intakes', ['settings'])
+      ...mapState('settings', ['settings'])
     },
   };
 </script>
