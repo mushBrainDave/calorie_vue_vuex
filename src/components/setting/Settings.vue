@@ -47,7 +47,7 @@
                     type="date"
                     />
                 </v-container>
-                <v-btn class="blue white--text" @click="updateSettings">Update</v-btn>
+                <v-btn class="blue white--text" @click="updateSettings(settings)">Update</v-btn>
                 <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
@@ -71,12 +71,13 @@
     components: {},
     data() {
       return {
+        settings: [],
         items: [
           { answer: 'the most calories I can get', value: true },
           { answer: 'the least calories I can get', value: false }
         ],
         showError: false,
-        pageTitle: "Add New Setting",
+        pageTitle: "Update Settings",
         isUpdate: false,
         showMsg: '',
       };
@@ -88,18 +89,18 @@
       }
     },
     computed: {
-      //...mapState('intakes', ['settings']),
-      settings: {
-      //settings: { cannot be used with spread operator
+      /*settings: {
         get() {
           return this.$store.state.settings.settings
-          //return this.settings
         },
         set(newValue) {
           this.$store.commit('settings/updateSettings', newValue)
         }
-      }
+      }*/
     },
+    mounted() {
+      this.settings = JSON.parse(JSON.stringify(this.$store.state.settings.settings))
+    }
   }
 </script>
 <style scoped>
