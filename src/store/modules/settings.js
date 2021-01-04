@@ -28,10 +28,10 @@ const actions = {
         }
       });
     },
-    updateSettings({commit}, newSetting) {
-      apiService.updateSettings(state.newSetting).then(response => {
+    updateSettings({commit}, payload) {
+      apiService.updateSettings(payload).then(response => {
         if (response.status === 200) {
-          commit('setSettings', newSetting)
+          commit('setSettings', payload)
           router.push('/');
         }else{
             this.showMsg = "error";
