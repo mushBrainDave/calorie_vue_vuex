@@ -57,17 +57,13 @@
     data() {
       return {
         showError: false,
-        intake: {},
+        //intake: [],
         pageTitle: "Add New Intake",
-        isUpdate: false,
         showMsg: '',
       };
     },
-    computed: {
-      ...mapState('intakes', ['intakes'])
-    },
-
     methods: {
+      ...mapActions('intakes', ['updateIntake']),
       createIntake() {
         apiService.addNewIntake(this.intake).then(response => {
           if (response.status === 201) {
@@ -88,34 +84,16 @@
       cancelOperation(){
          router.push("/intake-list");
       },
-      updateIntake() {
-        apiService.updateIntake(this.intake).then(response => {
-          if (response.status === 200) {
-            this.intake = response.data;
-            router.push('/intake-list/update');
-          }else{
-              this.showMsg = "error";
-          }
-        }).catch(error => {
-          if (error.response.status === 401) {
-            router.push("/auth");
-          }else if (error.response.status === 400) {
-            this.showMsg = "error";
-          }
-        });
-      }
     },
-    mounted() {
-      if (this.$route.params.pk) {
-        this.pageTitle = "Edit Intake";
-        this.isUpdate = true;
-        apiService.getIntake(this.$route.params.pk).then(response => {
-          this.intake = response.data;
-        }).catch(error => {
-          if (error.response.status === 401) {
-            router.push("/auth");
-          }
-        });
+    computed: {
+      ...mapState('intakes', ['isUpdate']),
+      intake: {
+        get() {
+          return this.$store.state.intakes.intake
+        },
+        set(newValue) {
+          this.$store.commit('intakes/updateIntake', newValue)
+        }
       }
     },
   }

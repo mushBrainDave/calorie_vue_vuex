@@ -103,6 +103,8 @@
         }
       },
       updateIntake(intake) {
+        this.$store.commit('intakes/setIntake', intake)
+        this.$store.commit('intakes/setUpdate', true)
         router.push('/intake-create/' + intake.id);
       },
       deleteIntake(intake) {

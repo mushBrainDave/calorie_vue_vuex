@@ -3,8 +3,10 @@ import {APIService} from '../../http/APIService';
 const apiService = new APIService();
 
 const state = {
+    intake: [],
     intakes: [],
     dates: ['2020-10-21', '2020-10-28'],
+    isUpdate: false
 }
 
 const getters = {
@@ -25,6 +27,15 @@ const mutations = {
     setDates(state, dates) {
         state.dates = dates
     },
+    setIntake(state, intake) {
+        state.intake = intake
+    },
+    updateIntake(state, intake) {
+        state.intake = intake
+    },
+    setUpdate(state, isUpdate) {
+        state.isUpdate = isUpdate
+    },
 }
 
 const actions = {
@@ -44,6 +55,56 @@ const actions = {
             }
         });
     },
+    createIntake({commit}) {
+        apiService.addNewIntake(this.intake).then(response => {
+            if (response.status === 201) {
+                this.intake = response.data;
+                this.showMsg = "";
+                router.push('/intake-list/new');
+            }else{
+                this.showMsg = "error";
+            }
+            }).catch(error => {
+                if (error.response.status === 401) {
+                router.push("/auth");
+            }else if (error.response.status === 400) {
+                this.showMsg = "error";
+            }
+        });
+    },
+    updateIntake({commit}) {
+        console.log('here')
+        apiService.updateIntake(state.intake).then(response => {
+            if (response.status === 200) {
+                commit('setIntake', state.intake)
+                //this.intake = response.data;
+                router.push('/intake-list/update');
+            }else{
+                this.showMsg = "error";
+            }
+            }).catch(error => {
+            if (error.response.status === 401) {
+                router.push("/auth");
+            }else if (error.response.status === 400) {
+                this.showMsg = "error";
+            }
+        });
+    },
+    deleteIntake({commit}, payload) {
+        apiService.deleteIntake(intake.id).then(response => {
+          if (response.status === 204) {
+            router.push('/intake-list/deleted/')
+            this.getintakes()
+          }
+        }).catch(error => {
+          if (error.response.status === 401) {
+            localStorage.removeItem('isAuthenticates');
+            localStorage.removeItem('log_user');
+            localStorage.removeItem('token');
+            router.push("/auth");
+          }
+        });
+      },
 }
 
 export default {
