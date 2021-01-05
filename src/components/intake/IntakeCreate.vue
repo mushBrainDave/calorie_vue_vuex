@@ -33,7 +33,7 @@
                     <v-text-field v-model="intake.intake_date" label="Intake Date" required type="date" />
                 </v-container>
                 <v-btn v-if="!isUpdate" class="blue white--text" @click="createIntake">Save</v-btn>
-                <v-btn v-if="isUpdate" class="blue white--text" @click="updateIntake">Update</v-btn>
+                <v-btn v-if="isUpdate" class="blue white--text" @click="save">Update</v-btn>
                 <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
@@ -57,6 +57,8 @@
     data() {
       return {
         showError: false,
+        saved: false,
+        canceled: false,
         //intake: [],
         pageTitle: "Add New Intake",
         showMsg: '',
@@ -64,7 +66,11 @@
     },
     methods: {
       ...mapActions('intakes', ['updateIntake']),
-      createIntake() {
+      save() {
+        this.saved = true
+        this.updateIntake(this.intake)
+      },
+      /*createIntake() {
         apiService.addNewIntake(this.intake).then(response => {
           if (response.status === 201) {
             this.intake = response.data;
@@ -80,9 +86,11 @@
             this.showMsg = "error";
           }
         });
-      },
+      },*/
       cancelOperation(){
-         router.push("/intake-list");
+        this.canceled = true
+        this.$store.commit('intakes/setUpdate', false)
+        router.push("/intake-list");
       },
     },
     computed: {
@@ -94,6 +102,25 @@
         set(newValue) {
           this.$store.commit('intakes/updateIntake', newValue)
         }
+      }
+    },
+    mounted() {
+      if (this.isUpdate) {
+        this.pageTitle = "Edit Intake"
+      }
+    },
+    beforeRouteLeave(to, from, next) {
+      if (this.saved) {
+        next()
+      }else if (this.canceled) {
+        next()
+      }else {
+        const confirm = window.confirm("Save changes?")
+        if (confirm) {
+          this.updateIntake(this.intake)
+          next()
+        }
+        next(false)
       }
     },
   }

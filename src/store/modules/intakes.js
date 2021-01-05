@@ -56,10 +56,10 @@ const actions = {
         });
     },
     createIntake({commit}) {
-        apiService.addNewIntake(this.intake).then(response => {
+        apiService.addNewIntake(state.intake).then(response => {
             if (response.status === 201) {
-                this.intake = response.data;
-                this.showMsg = "";
+                commit('setIntake', [])
+                commit('setUpdate', false)
                 router.push('/intake-list/new');
             }else{
                 this.showMsg = "error";
@@ -76,8 +76,8 @@ const actions = {
         console.log('here')
         apiService.updateIntake(state.intake).then(response => {
             if (response.status === 200) {
-                commit('setIntake', state.intake)
-                //this.intake = response.data;
+                commit('setIntake', [])
+                commit('setUpdate', false)
                 router.push('/intake-list/update');
             }else{
                 this.showMsg = "error";
