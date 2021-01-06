@@ -58,6 +58,8 @@
   import TableMobile from './charts/TableMobile';
   import DatePicker from '../date_picker/DatePicker';
 
+  import { mapActions } from 'vuex'
+
   export default {
     name: "IntakeList",
     components: {
@@ -76,6 +78,7 @@
       this.getUser();
     },
     methods: {
+      ...mapActions('intakes', ['deleteIntake']),
       getUser() {
         if (localStorage.getItem("isAuthenticates")
           && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
@@ -106,21 +109,6 @@
         this.$store.commit('intakes/setIntake', intake)
         this.$store.commit('intakes/setUpdate', true)
         router.push('/intake-create/' + intake.id);
-      },
-      deleteIntake(intake) {
-        apiService.deleteIntake(intake.id).then(response => {
-          if (response.status === 204) {
-            router.push('/intake-list/deleted/')
-            this.getintakes()
-          }
-        }).catch(error => {
-          if (error.response.status === 401) {
-            localStorage.removeItem('isAuthenticates');
-            localStorage.removeItem('log_user');
-            localStorage.removeItem('token');
-            router.push("/auth");
-          }
-        });
       },
     }
   };

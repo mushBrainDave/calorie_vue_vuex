@@ -38,6 +38,10 @@ const mutations = {
     },
     addIntake(state, intake) {
         state.intakes.push(intake)
+    },
+    deleteIntake(state, intake) {
+        console.log(intake)
+        state.intakes.splice(state.intakes.indexOf(intake), 1)
     }
 }
 
@@ -93,10 +97,11 @@ const actions = {
             }
         });
     },
-    deleteIntake({commit}, payload) {
-        apiService.deleteIntake(intake.id).then(response => {
+    deleteIntake({commit}, state) {
+        apiService.deleteIntake(state.id).then(response => {
           if (response.status === 204) {
-            router.push('/intake-list/deleted/')
+            commit('deleteIntake', state)
+            //router.push('/intake-list/deleted/')
             this.getintakes()
           }
         }).catch(error => {
