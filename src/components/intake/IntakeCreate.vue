@@ -49,7 +49,7 @@
   import router from '../../router';
   import {APIService} from '../../http/APIService';
   const apiService = new APIService();
-  import { mapState, mapActions, mapGetters, mapMutations } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
 
   export default {
     name: 'IntakeCreate',
