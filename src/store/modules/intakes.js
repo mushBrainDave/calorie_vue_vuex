@@ -3,7 +3,7 @@ import {APIService} from '../../http/APIService';
 const apiService = new APIService();
 
 const state = {
-    intake: [],
+    intake: {},
     intakes: [],
     dates: ['2020-10-21', '2020-10-28'],
     isUpdate: false
@@ -36,6 +36,9 @@ const mutations = {
     setUpdate(state, isUpdate) {
         state.isUpdate = isUpdate
     },
+    addIntake(state, intake) {
+        state.intakes.push(intake)
+    }
 }
 
 const actions = {
@@ -55,9 +58,10 @@ const actions = {
             }
         });
     },
-    createIntake({commit}) {
-        apiService.addNewIntake(state.intake).then(response => {
+    createIntake({commit}, payload) {
+        apiService.addNewIntake(payload).then(response => {
             if (response.status === 201) {
+                commit('addIntake', payload)
                 commit('setIntake', [])
                 commit('setUpdate', false)
                 router.push('/intake-list/new');
@@ -72,9 +76,8 @@ const actions = {
             }
         });
     },
-    updateIntake({commit}) {
-        console.log('here')
-        apiService.updateIntake(state.intake).then(response => {
+    updateIntake({commit}, payload) {
+        apiService.updateIntake(payload).then(response => {
             if (response.status === 200) {
                 commit('setIntake', [])
                 commit('setUpdate', false)

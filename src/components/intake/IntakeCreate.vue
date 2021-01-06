@@ -32,7 +32,7 @@
                     <v-text-field v-model="intake.carbs" label="Carbs (g)" required type="number" />
                     <v-text-field v-model="intake.intake_date" label="Intake Date" required type="date" />
                 </v-container>
-                <v-btn v-if="!isUpdate" class="blue white--text" @click="createIntake">Save</v-btn>
+                <v-btn v-if="!isUpdate" class="blue white--text" @click="save">Save</v-btn>
                 <v-btn v-if="isUpdate" class="blue white--text" @click="save">Update</v-btn>
                 <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
@@ -65,31 +65,21 @@
       };
     },
     methods: {
-      ...mapActions('intakes', ['updateIntake']),
+      ...mapActions('intakes', ['updateIntake', 'createIntake']),
+
       save() {
         this.saved = true
-        this.updateIntake(this.intake)
+        if (this.isUpdate) {
+          this.updateIntake(this.intake)
+        }
+        else {
+          this.createIntake(this.intake)
+        }
       },
-      /*createIntake() {
-        apiService.addNewIntake(this.intake).then(response => {
-          if (response.status === 201) {
-            this.intake = response.data;
-             this.showMsg = "";
-            router.push('/intake-list/new');
-          }else{
-              this.showMsg = "error";
-          }
-        }).catch(error => {
-          if (error.response.status === 401) {
-            router.push("/auth");
-          }else if (error.response.status === 400) {
-            this.showMsg = "error";
-          }
-        });
-      },*/
       cancelOperation(){
         this.canceled = true
         this.$store.commit('intakes/setUpdate', false)
+        this.$store.commit('intakes/updateIntake', [])
         router.push("/intake-list");
       },
     },
@@ -110,15 +100,16 @@
       }
     },
     beforeRouteLeave(to, from, next) {
-      if (this.saved) {
-        next()
-      }else if (this.canceled) {
+      if (this.saved || this.canceled) {
         next()
       }else {
         const confirm = window.confirm("Save changes?")
-        if (confirm) {
+        if (confirm && this.isUpdate) {
           this.updateIntake(this.intake)
           next()
+        }
+        else {
+          this.createIntake(this.intake)
         }
         next(false)
       }
