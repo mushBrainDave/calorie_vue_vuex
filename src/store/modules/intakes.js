@@ -5,18 +5,26 @@ const apiService = new APIService();
 const state = {
     intake: {},
     intakes: [],
-    dates: ['2020-10-21', '2020-10-28'],
+    //dates: ['2020-10-21', '2020-10-28'],
+    dates: [
+        new Date(new Date().setDate(new Date().getDate() - 7)).toISOString().substr(0, 10), 
+        new Date().toISOString().substr(0, 10)
+    ],
     isUpdate: false
 }
 
 const getters = {
-    intakesByD (state)  {
+    intakesByD (state) {
         return state.intakes.filter(entry => {
           return (
             entry.intake_date >= state.dates[0] &&
             entry.intake_date <= state.dates[1]
           )
         })
+    },
+    dates (state) {
+        const firstDate = new Date()
+        firstDate.setDate(firstDate.getDate() - 7)
     }
 }
 
@@ -40,7 +48,6 @@ const mutations = {
         state.intakes.push(intake)
     },
     deleteIntake(state, intake) {
-        console.log(intake)
         state.intakes.splice(state.intakes.indexOf(intake), 1)
     }
 }

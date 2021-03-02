@@ -88,16 +88,16 @@
          router.push("/");
       }
     },
-    computed: {
-      /*settings: {
+    /*computed: {
+      settings: {
         get() {
           return this.$store.state.settings.settings
         },
         set(newValue) {
           this.$store.commit('settings/updateSettings', newValue)
         }
-      }*/
-    },
+      }
+    },*/
     mounted() {
       this.settings = JSON.parse(JSON.stringify(this.$store.state.settings.settings))
     }

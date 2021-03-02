@@ -78,7 +78,7 @@
       this.getUser();
     },
     methods: {
-      ...mapActions('intakes', ['deleteIntake']),
+      ...mapActions('intakes', ['deleteIntake', 'updateIntake']),
       getUser() {
         if (localStorage.getItem("isAuthenticates")
           && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
@@ -108,7 +108,7 @@
       updateIntake(intake) {
         this.$store.commit('intakes/setIntake', intake)
         this.$store.commit('intakes/setUpdate', true)
-        router.push('/intake-create/' + intake.id);
+        router.push('/intake-create/');
       },
     }
   };
