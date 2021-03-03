@@ -1,6 +1,8 @@
 # calorie_vue
 
 > UI for calorie counter project
+> 
+>See [example](https://gallant-ardinghelli-0dbec2.netlify.app).
 
 ## Build Setup
 
