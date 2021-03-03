@@ -2,7 +2,7 @@
 
 > UI for calorie counter project
 > 
->See [example](https://gallant-ardinghelli-0dbec2.netlify.app).
+>See [example](https://vibrant-cray-ba11d5.netlify.app).
 
 ## Build Setup
 
